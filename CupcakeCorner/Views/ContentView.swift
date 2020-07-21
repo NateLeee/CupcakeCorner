@@ -27,7 +27,7 @@ struct ContentView: View {
         let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song")!
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error != nil else {
+            guard error == nil else {
                 print("URLSession.shared.dataTask... error!")
                 return
             }
