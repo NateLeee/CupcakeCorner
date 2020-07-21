@@ -1,0 +1,13 @@
+//
+//  Response.swift
+//  CupcakeCorner
+//
+//  Created by Nate Lee on 7/21/20.
+//  Copyright © 2020 Nate Lee. All rights reserved.
+//
+
+import Foundation
+
+struct Response: Codable {
+    var results: [Result]
+}

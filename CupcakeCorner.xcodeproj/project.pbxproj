@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA092B0024C69BAB00D64D40 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA092AFF24C69BAB00D64D40 /* Response.swift */; };
+		FA092B0224C69BD100D64D40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA092B0124C69BD100D64D40 /* Result.swift */; };
 		FAF795BE24C55D59009D51E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF795BD24C55D59009D51E1 /* AppDelegate.swift */; };
 		FAF795C024C55D59009D51E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF795BF24C55D59009D51E1 /* SceneDelegate.swift */; };
 		FAF795C224C55D59009D51E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF795C124C55D59009D51E1 /* ContentView.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA092AFF24C69BAB00D64D40 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		FA092B0124C69BD100D64D40 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		FAF795BA24C55D59009D51E1 /* CupcakeCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CupcakeCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF795BD24C55D59009D51E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF795BF24C55D59009D51E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA092AFE24C69B9B00D64D40 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA092AFF24C69BAB00D64D40 /* Response.swift */,
+				FA092B0124C69BD100D64D40 /* Result.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FAF795B124C55D59009D51E1 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		FAF795BC24C55D59009D51E1 /* CupcakeCorner */ = {
 			isa = PBXGroup;
 			children = (
+				FA092AFE24C69B9B00D64D40 /* Models */,
 				FAF795BD24C55D59009D51E1 /* AppDelegate.swift */,
 				FAF795BF24C55D59009D51E1 /* SceneDelegate.swift */,
 				FAF795C124C55D59009D51E1 /* ContentView.swift */,
@@ -146,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA092B0024C69BAB00D64D40 /* Response.swift in Sources */,
+				FA092B0224C69BD100D64D40 /* Result.swift in Sources */,
 				FAF795BE24C55D59009D51E1 /* AppDelegate.swift in Sources */,
 				FAF795C024C55D59009D51E1 /* SceneDelegate.swift in Sources */,
 				FAF795C224C55D59009D51E1 /* ContentView.swift in Sources */,
