@@ -50,6 +50,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FA092B0324C69C8E00D64D40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FAF795C124C55D59009D51E1 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FAF795B124C55D59009D51E1 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +80,7 @@
 				FA092AFE24C69B9B00D64D40 /* Models */,
 				FAF795BD24C55D59009D51E1 /* AppDelegate.swift */,
 				FAF795BF24C55D59009D51E1 /* SceneDelegate.swift */,
-				FAF795C124C55D59009D51E1 /* ContentView.swift */,
+				FA092B0324C69C8E00D64D40 /* Views */,
 				FAF795C324C55D5A009D51E1 /* Assets.xcassets */,
 				FAF795C824C55D5A009D51E1 /* LaunchScreen.storyboard */,
 				FAF795CB24C55D5A009D51E1 /* Info.plist */,
