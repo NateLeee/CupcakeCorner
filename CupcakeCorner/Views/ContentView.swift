@@ -9,45 +9,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var response: Response = Response(results: [Result]())
+    @State private var username = ""
+    @State private var email = ""
+    
+    var invalidInput: Bool {
+        return username.count == 0 || email.count == 0
+    }
     
     var body: some View {
-        List(response.results, id: \.trackId) { result in
-            VStack(alignment: .leading) {
-                Text(result.trackName)
-                    .font(.headline)
-                
-                Text(result.collectionName)
+        Form {
+            Section {
+                TextField("Username", text: $username)
+                TextField("Email", text: $email)
             }
+            
+            Section {
+                Button("Create account") {
+                    print("Creating account…")
+                }
+            }
+            .disabled(invalidInput)
         }
-        .onAppear(perform: loadData)
     }
     
-    private func loadData() {
-        let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song")!
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                print("URLSession.shared.dataTask... error: \(error?.localizedDescription ?? "Unknown Error!")")
-                return
-            }
-            
-            guard let data = data else {
-                print("data is nil!")
-                return
-            }
-            
-            guard let decoded = try? JSONDecoder().decode(Response.self, from: data) else {
-                print("JSONDecoder().decode() error!")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.response.results = decoded.results
-            }
-            
-        }.resume()
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
