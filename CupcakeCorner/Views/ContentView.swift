@@ -9,26 +9,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var username = ""
-    @State private var email = ""
-    
-    var invalidInput: Bool {
-        return username.count == 0 || email.count == 0
-    }
+    @ObservedObject var order = Order()
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Username", text: $username)
-                TextField("Email", text: $email)
-            }
-            
-            Section {
-                Button("Create account") {
-                    print("Creating account…")
+        NavigationView {
+            Form {
+                Section {
+                    Picker("Select your cupcake type", selection: $order.type) {
+                        ForEach(0 ..< Order.types.count, id: \.self) {
+                            Text("\(Order.types[$0])")
+                        }
+                    }
+                    //.pickerStyle(SegmentedPickerStyle())
+                    
+                    Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 1 ... 20)
                 }
+                
+                Section {
+                    Toggle("Any special requests?", isOn: $order.specialRequestEnabled.animation())
+                    // Toggle("Any special requests?", isOn: $order.specialRequestEnabled)
+                    
+                    if order.specialRequestEnabled { // Let there be animation!
+                        Toggle("Add extra frosting", isOn: $order.extraFrosting)
+                        Toggle("Add extra sprinkles", isOn: $order.addSprinkles)
+                    }
+                }
+                
             }
-            .disabled(invalidInput)
+            .navigationBarTitle("Cupcake Corner")
         }
     }
     
