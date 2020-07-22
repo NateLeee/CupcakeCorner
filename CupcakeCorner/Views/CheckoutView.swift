@@ -11,6 +11,9 @@ import SwiftUI
 struct CheckoutView: View {
     @ObservedObject var order: Order
     
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         GeometryReader { geo in
             ScrollView(.vertical) {
@@ -28,6 +31,9 @@ struct CheckoutView: View {
             }
         }
         .navigationBarTitle("Check out", displayMode: .inline)
+        .alert(isPresented: $showingAlert) { () -> Alert in
+            Alert(title: Text("✅ Success!"), message: Text(alertMessage), dismissButton: Alert.Button.default(Text("OK")))
+        }
     }
     
     func placeOrder() {
@@ -50,8 +56,12 @@ struct CheckoutView: View {
             
             if let decoded = try? JSONDecoder().decode(Order.self, from: data) {
                 print(decoded)
+                
+                DispatchQueue.main.async {
+                    self.showingAlert.toggle()
+                    self.alertMessage = "Your order for \(decoded.quantity)x \(Order.types[decoded.type].lowercased()) cupcakes is on its way!"
+                }
             }
-            
             
         }.resume()
     }
