@@ -22,12 +22,38 @@ struct CheckoutView: View {
                 Text("Your order is $\(self.order.cost, specifier: "%.2f")")
                 
                 Button("Place Order") {
-                    
+                    self.placeOrder()
                 }
                 .padding()
             }
         }
         .navigationBarTitle("Check out", displayMode: .inline)
+    }
+    
+    func placeOrder() {
+        let url = URL(string: "https://reqres.in/api/orders")!
+        var request = URLRequest(url: url)
+        request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        
+        let jsonData = try? JSONEncoder().encode(order)
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            if let decoded = try? JSONDecoder().decode(Order.self, from: data) {
+                print(decoded)
+            }
+            
+            
+        }.resume()
     }
 }
 
