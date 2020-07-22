@@ -30,6 +30,16 @@ class Order: ObservableObject, Codable {
     @Published var city = ""
     @Published var zip = ""
     
+    var cost: Double {
+        var price = Double(quantity) * 2
+        
+        price += Double(type) / 2 // More complicated, more expensive.
+        price += extraFrosting ? Double(quantity) : 0
+        price += addSprinkles ? Double(quantity) / 2 : 0
+        
+        return price
+    }
+    
     var hasValidAddress: Bool {
         if (name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty) {
             return false

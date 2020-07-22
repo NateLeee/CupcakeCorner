@@ -12,7 +12,22 @@ struct CheckoutView: View {
     @ObservedObject var order: Order
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            ScrollView(.vertical) {
+                Image("cupcakes")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: geo.size.width)
+                
+                Text("Your order is $\(self.order.cost, specifier: "%.2f")")
+                
+                Button("Place Order") {
+                    
+                }
+                .padding()
+            }
+        }
+        .navigationBarTitle("Check out", displayMode: .inline)
     }
 }
 
