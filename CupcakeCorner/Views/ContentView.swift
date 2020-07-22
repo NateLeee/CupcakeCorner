@@ -28,7 +28,7 @@ struct ContentView: View {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
-                print("URLSession.shared.dataTask... error!")
+                print("URLSession.shared.dataTask... error: \(error?.localizedDescription ?? "Unknown Error!")")
                 return
             }
             
