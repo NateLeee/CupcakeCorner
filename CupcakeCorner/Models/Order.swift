@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 class Order: ObservableObject, Codable {
     enum CodingKeys: CodingKey {
         case type
@@ -103,4 +104,68 @@ class Order: ObservableObject, Codable {
         try container.encode(city, forKey: .city)
         try container.encode(zip, forKey: .zip)
     }
+}
+*/
+
+struct Order: Codable {
+    static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
+    
+    var type = 0
+    var quantity = 3
+    
+    var specialRequestEnabled = false {
+        didSet {
+            if specialRequestEnabled == false {
+                extraFrosting = false
+                addSprinkles = false
+            }
+        }
+    }
+    var extraFrosting = false
+    var addSprinkles = false
+    
+    var cost: Double {
+        var price = Double(quantity) * 2
+        
+        price += Double(quantity) * Double(type) / 2 // More complicated, more expensive.
+        price += extraFrosting ? Double(quantity) : 0
+        price += addSprinkles ? Double(quantity) / 2 : 0
+        
+        return price
+    }
+    
+    var name = ""
+    var streetAddress = ""
+    var city = ""
+    var zip = ""
+    
+    var hasValidAddress: Bool {
+        if (name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty) {
+            return false
+        }
+        
+        if (isInvalidString(name) || isInvalidString(streetAddress) || isInvalidString(city) || isInvalidString(zip)) {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func isInvalidString(_ string: String) -> Bool {
+        let charactersArray = Array(string)
+        let charactersSet = Set(charactersArray)
+        
+        // A string of pure whitespace is not a valid.
+        if (charactersSet.count == 1 && charactersSet.first == " ") {
+            return true
+        }
+        
+        // Otherwise, consider them valid for now.
+        return false
+    }
+    
+}
+
+class OrderWrapper: ObservableObject {
+    @Published var order: Order = Order()
 }

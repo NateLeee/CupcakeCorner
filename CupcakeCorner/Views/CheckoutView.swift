@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CheckoutView: View {
-    @ObservedObject var order: Order
+    @ObservedObject var orderWrapper: OrderWrapper
     
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -24,7 +24,7 @@ struct CheckoutView: View {
                     .scaledToFit()
                     .frame(width: geo.size.width)
                 
-                Text("Your order is $\(self.order.cost, specifier: "%.2f")")
+                Text("Your order is $\(self.orderWrapper.order.cost, specifier: "%.2f")")
                 
                 Button("Place Order") {
                     self.placeOrder()
@@ -48,7 +48,7 @@ struct CheckoutView: View {
         request.setValue("application/JSON", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         
-        let jsonData = try? JSONEncoder().encode(order)
+        let jsonData = try? JSONEncoder().encode(orderWrapper.order)
         request.httpBody = jsonData
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -70,7 +70,7 @@ struct CheckoutView: View {
                 
                 DispatchQueue.main.async {
                     self.showingAlert.toggle()
-                    self.alertMessage = "Your order for \(decoded.quantity)x \(Order.types[decoded.type].lowercased()) cupcakes is on its way!"
+                    self.alertMessage = "Your order for \(Order.types[decoded.type].lowercased()) cupcakes x\(decoded.quantity) is on its way!"
                 }
             }
             
@@ -80,6 +80,6 @@ struct CheckoutView: View {
 
 struct CheckoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckoutView(order: Order())
+        CheckoutView(orderWrapper: OrderWrapper())
     }
 }
