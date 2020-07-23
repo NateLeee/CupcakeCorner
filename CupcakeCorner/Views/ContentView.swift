@@ -22,7 +22,7 @@ struct ContentView: View {
                     }
                     //.pickerStyle(SegmentedPickerStyle())
                     
-                    Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 1 ... 20)
+                    Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 3 ... 20)
                 }
                 
                 Section {

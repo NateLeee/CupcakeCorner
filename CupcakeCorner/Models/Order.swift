@@ -20,7 +20,7 @@ class Order: ObservableObject, Codable {
     static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
     
     @Published var type = 0
-    @Published var quantity = 1
+    @Published var quantity = 3
     
     @Published var specialRequestEnabled = false {
         didSet {
@@ -41,7 +41,7 @@ class Order: ObservableObject, Codable {
     var cost: Double {
         var price = Double(quantity) * 2
         
-        price += Double(type) / 2 // More complicated, more expensive.
+        price += Double(quantity) * Double(type) / 2 // More complicated, more expensive.
         price += extraFrosting ? Double(quantity) : 0
         price += addSprinkles ? Double(quantity) / 2 : 0
         

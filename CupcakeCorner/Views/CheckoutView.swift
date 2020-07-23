@@ -14,6 +14,8 @@ struct CheckoutView: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
+    @State private var hasNetworkError = false
+    
     var body: some View {
         GeometryReader { geo in
             ScrollView(.vertical) {
@@ -32,7 +34,11 @@ struct CheckoutView: View {
         }
         .navigationBarTitle("Check out", displayMode: .inline)
         .alert(isPresented: $showingAlert) { () -> Alert in
-            Alert(title: Text("✅ Success!"), message: Text(alertMessage), dismissButton: Alert.Button.default(Text("OK")))
+            if (hasNetworkError) {
+                return Alert(title: Text("Oops!"), message: Text(alertMessage), dismissButton: Alert.Button.default(Text("Got it")))
+            } else {
+                return Alert(title: Text("✅ Success!"), message: Text(alertMessage), dismissButton: Alert.Button.default(Text("OK")))
+            }
         }
     }
     
@@ -47,6 +53,11 @@ struct CheckoutView: View {
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
+                DispatchQueue.main.async {
+                    self.hasNetworkError = true
+                    self.showingAlert.toggle()
+                    self.alertMessage = "Network Error: \(error!.localizedDescription) Try it again later..."
+                }
                 return
             }
             
