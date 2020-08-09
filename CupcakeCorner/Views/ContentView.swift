@@ -41,12 +41,10 @@ struct ContentView: View {
                         Text("Deliver details")
                     }
                 }
-                
             }
             .navigationBarTitle("Cupcake Corner")
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
